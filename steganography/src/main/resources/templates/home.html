@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Steganography</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/custom.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/scripts.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Steganography</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://github.com/osokolovic1/Steganography-Using-Spring" target="_blank">GitHub</a></li>
+            <li><a href="https://en.wikipedia.org/wiki/Steganography" target="_blank">About</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+
+        <div class="row" style="margin-top: 5%;">
+          <div class="col-sm-6">
+            <form enctype="multipart/form-data" th:action="@{/hide}" method="POST">
+              <h4>Hide message in image:</h4>
+              <hr  />
+              <div class="form-group">
+                <label for="imgCode">Image:</label>
+                <input type="file" class="form-control" id="imgInputCode" th:name="imageCode" accept="image/*"
+                  onchange="onChangeInput(1);" />
+              </div>
+              <div class="form-group">
+                <label for="msgCode">Message:</label>
+                <textarea class="form-control" rows="5" id="msgCode" th:name="messageCode" required="true"></textarea>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="checkCoded" th:name="checkCode" />
+                <label class="form-check-label" for="checkCoded">Add "Coded" to image name</label>
+              </div>
+              <div class="text-center">
+                <button type="submit" id="submitCode" class="btn btn-default" disabled="true">Hide Message</button>
+              </div>
+            </form>
+
+            <img src="" alt="&nbsp;&nbsp;No image available" id="previewCode" />
+          </div>
+
+          <div class="col-sm-6">
+            <form enctype="multipart/form-data" th:action="@{/show}" method="POST">
+              <h4>Show message hidden in image:</h4>
+              <hr  />
+              <div class="form-group">
+                <label for="imgDecode">Image:</label>
+                <input type="file" class="form-control" id="imgDecode" th:name="imageDecode" accept="image/*"
+                  onchange="onChangeInput(2);" />
+              </div>
+              <div class="text-center">
+                <button type="submit" id="submitDecode" class="btn btn-default" disabled="true">Show Message</button>
+              </div>
+              <div class="form-group" style="margin-top: 2%;">
+                <label for="msgCode">Message:</label>
+                <textarea class="form-control" rows="5" id="msgDecode" th:name="messageDecode" readonly="true"
+                  th:text="*{decodedMessage}"></textarea>
+              </div>
+            </form>
+
+            <img src="" alt="&nbsp;&nbsp;No image available" id="previewDecode" />
+          </div>
+        </div>
+
+    </div> <!-- /container -->
+
+  </body>
+</html>
