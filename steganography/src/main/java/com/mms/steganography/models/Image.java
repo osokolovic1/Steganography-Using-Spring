@@ -81,12 +81,11 @@ public class Image {
 		byte[] messageBytes = codedMessage.getBytes();
 		if (maxX * maxY - 40 < messageBytes.length * 4)
 			return false;
-		//prolaziti kroz bajtove u poruci i smještati po bit u svaki rgb iz slike
+		
 		for (int i = 0; i < messageBytes.length; i++)
 			encodeByte(messageBytes[i]);
 		
-		return true;
-		
+		return true;	
 	}
 	
 	private void encodeByte(byte b) {
@@ -99,8 +98,8 @@ public class Image {
 				//reading from right to left, and writing in the same way - firstInPair on B and second on G
 				boolean firstInPair = getBit(b, count * 2);
 				boolean secondInPair = getBit(b, count * 2 + 1);
-				// a |= (1 << bitindex) - sets bit of a with given index on 1
-				// a &= ~(1 << bitindex) - sets bit of a with given index on 0
+				// a |= (1 << bitindex) - sets bit with a given index on 1
+				// a &= ~(1 << bitindex) - sets bit with a given index on 0
 				int rgb = this.img.getRGB(this.usedY, this.usedX);
 				if (firstInPair) 
 					rgb |= (1 << 0);
@@ -162,7 +161,7 @@ public class Image {
 				}
 				if (pixelNum == 16 && !message.equals("code"))
 					//check if "code" is at the beggining, if not, image is not coded
-					return "This image is does not contain any messages.";
+					return "This image does not contain any messages.";
 			}
 		}
 		
